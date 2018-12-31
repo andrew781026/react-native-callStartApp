@@ -1,0 +1,40 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rn">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" /> <!-- 權限 : 有電話進來時 , 直接解鎖屏幕 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 權限 : 有電話進來時 , 讓螢幕變亮 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 權限 : 有電話進來時 , activity screen 在鎖屏之上 -->
+
+    <application
+        android:name=".MainApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+
+        <!-- service 處理 , 電話進來時 , 打開 activity -->
+        <service android:name=".service.AlarmService" />
+        <!-- receiver 接收時間到的訊號 , 開啟服務處理後續事項 -->
+        <receiver android:name=".receiver.AlarmReceiver" />
+
+        <activity android:name=".activity.AlarmActivity" />
+
+
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+    </application>
+
+</manifest>
